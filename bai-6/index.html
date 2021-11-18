@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>bai 1</title>
+    <script src="./script.js"></script>
+    <style>
+      input {
+        display: block;
+        height: 30;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+      #frmXuly {
+        border: 1px solid green;
+        width: 500px;
+        margin: 0 auto;
+      }
+      #frmXuly div {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+      }
+      button {
+        background: green;
+        color: white;
+        font-size: 16px;
+        text-transform: uppercase;
+        padding: 5;
+      }
+      #result {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>hello javascript</h1>
+    <form id="frmSach">
+      <label>mã sách</label>
+      <input type="text" id="maSach" placeholder="mã sách" />
+      <label>tên sách</label>
+      <input type="text" id="tenSach" placeholder="tên sách" />
+      <label>năm sản xuất</label>
+      <input type="text" id="namSX" placeholder="năm sx sách" />
+      <label>số trang</label>
+      <input type="text" id="soTrang" placeholder="số trang sách" />
+      <label>tác giả</label>
+      <input type="text" id="tacGia" placeholder="tác giả sách" />
+      <input type="button" onClick="addSach()" value="them sach" />
+    </form>
+  </body>
+</html>
