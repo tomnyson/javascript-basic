@@ -231,6 +231,34 @@ function isEmpty(value) {
   }
   return true;
 }
+
+function removeBook(maSach) {
+  console.log("maSach", maSach);
+  const tmp = arrSach.filter((item) => item.maSach != maSach);
+  arrSach = [...tmp];
+  console.log("arrSach", arrSach);
+  showListSach();
+}
+function showListSach() {
+  const items = document.getElementById("items");
+  items.innerHTML = "";
+  let html = "";
+  if (arrSach.length > 0) {
+    arrSach.forEach((item, index) => {
+      html += `
+      <tr>
+                <td>${item.maSach}</td>
+                <td>${item.tenSach}</td>
+                <td>${item.namSX}</td>
+                <td>${item.soTrang}</td>
+                <td>${item.tacGia}</td>
+                <td onClick="removeBook(${item.maSach})" class="remove">remove</td>
+      </tr>
+    `;
+    });
+    items.innerHTML = html;
+  }
+}
 function addSach() {
   event.preventDefault();
   const maSach = document.getElementById("maSach").value;
@@ -264,14 +292,19 @@ function addSach() {
       // alert("đã có key");
       const isUpdate = confirm(`bạn có muốn cập nhật mã sách ${sach.maSach}`);
       if (isUpdate == true) {
-        // sử dụng map
-        arrSach = arrSach.map((item) => {
-          if (item.maSach === sach.maSach)
+        const tmpArr = arrSach.map((item) => {
+          if (item.maSach === sach.maSach) {
             return {
-              ma: item.maSach,
-              ten: item.tenSach,
+              ...sach,
             };
+          } else {
+            return {
+              ...item,
+            };
+          }
         });
+        console.log("tmp", tmpArr);
+        arrSach = [...tmpArr];
         // cách 2
         // arrSach.forEach((item, index) => {
         //   if (item.maSach === sach.maSach) {
@@ -281,7 +314,8 @@ function addSach() {
       }
     }
     //thêm sách
-
+    console.log("showListSach");
+    showListSach();
     console.log(arrSach);
   }
 }
