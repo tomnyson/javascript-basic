@@ -224,7 +224,7 @@
  */
 
 // khởi tạo một object dom
-var arrSach = [];
+let arrSach = [];
 function isEmpty(value) {
   if (value !== "" && value !== undefined) {
     return false;
@@ -232,6 +232,7 @@ function isEmpty(value) {
   return true;
 }
 function addSach() {
+  event.preventDefault();
   const maSach = document.getElementById("maSach").value;
   const tenSach = document.getElementById("tenSach").value;
   const namSX = document.getElementById("namSX").value;
@@ -260,11 +261,27 @@ function addSach() {
       arrSach.push(sach);
     } else {
       // update sách
-      alert("đã có key");
+      // alert("đã có key");
+      const isUpdate = confirm(`bạn có muốn cập nhật mã sách ${sach.maSach}`);
+      if (isUpdate == true) {
+        // sử dụng map
+        arrSach = arrSach.map((item) => {
+          if (item.maSach === sach.maSach)
+            return {
+              ma: item.maSach,
+              ten: item.tenSach,
+            };
+        });
+        // cách 2
+        // arrSach.forEach((item, index) => {
+        //   if (item.maSach === sach.maSach) {
+        //     arrSach[index] = sach;
+        //   }
+        // });
+      }
     }
     //thêm sách
 
     console.log(arrSach);
   }
-  event.preventDefault();
 }
