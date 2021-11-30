@@ -1,8 +1,19 @@
 {
 	"folders": [
 		{
+			"name": "project-training",
 			"path": "."
+		},
+		{
+			"name": "startbootstrap-clean-blog-gh-pages",
+			"path": "../../../../Downloads/startbootstrap-clean-blog-gh-pages"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "project-training",
+		"files.associations": {
+			"iostream": "cpp",
+			"ostream": "cpp"
+		}
+	}
 }

@@ -227,3 +227,102 @@ bài 4: in ra các sô nguyên tố từ 0-100
 bài 5: S = 1 x 2 x 3…x N
 
 Tính trung bình cộng các số lẻ ở vị trí chẵn
+
+## Object class
+
+```
+class ClassName {
+  constructor() { ... }
+}
+
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+}
+
+let myCar1 = new Car("Ford", 2014);
+
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+  age() {
+    let date = new Date();
+    return date.getFullYear() - this.year;
+  }
+}
+
+let myCar = new Car("Ford", 2014);
+document.getElementById("demo").innerHTML =
+"My car is " + myCar.age() + " years old.";
+```
+
+###
+
+```
+class Car {
+  constructor(brand) {
+    this.carname = brand;
+  }
+  present() {
+    return 'I have a ' + this.carname;
+  }
+}
+
+class Model extends Car {
+  constructor(brand, mod) {
+    super(brand);
+    this.model = mod;
+  }
+  show() {
+    return this.present() + ', it is a ' + this.model;
+  }
+}
+
+let myCar = new Model("Ford", "Mustang");
+document.getElementById("demo").innerHTML = myCar.show();
+```
+
+### get set
+
+```
+class Car {
+  constructor(brand) {
+    this.carname = brand;
+  }
+  get cnam() {
+    return this.carname;
+  }
+  set cnam(x) {
+    this.carname = x;
+  }
+}
+
+let myCar = new Car("Ford");
+
+```
+
+### static
+
+```
+  class Car {
+    constructor(name) {
+      this.name = name;
+    }
+    static hello() {
+      return "Hello!!";
+    }
+  }
+
+  let myCar = new Car("Ford");
+
+  // You can call 'hello()' on the Car Class:
+  document.getElementById("demo").innerHTML = Car.hello();
+
+  // But NOT on a Car Object:
+  // document.getElementById("demo").innerHTML = myCar.hello();
+  // this will raise an error.
+```

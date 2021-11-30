@@ -224,7 +224,8 @@
  */
 
 // khởi tạo một object dom
-let arrSach = [];
+let arrSach = JSON.parse(localStorage.getItem("listSach")) || [];
+console.log("arrSach", arrSach);
 function isEmpty(value) {
   if (value !== "" && value !== undefined) {
     return false;
@@ -233,16 +234,15 @@ function isEmpty(value) {
 }
 
 function removeBook(maSach) {
-  console.log("maSach", maSach);
   const tmp = arrSach.filter((item) => item.maSach != maSach);
   arrSach = [...tmp];
-  console.log("arrSach", arrSach);
   showListSach();
 }
 function showListSach() {
   const items = document.getElementById("items");
   items.innerHTML = "";
   let html = "";
+  console.log("arrSach", arrSach);
   if (arrSach.length > 0) {
     arrSach.forEach((item, index) => {
       html += `
@@ -258,6 +258,14 @@ function showListSach() {
     });
     items.innerHTML = html;
   }
+}
+function isKiemTraTonTai(ma) {
+  for (let i = 0; i < arrSach.length; i++) {
+    if (arrSach[i].maSach === ma) {
+      return i;
+    }
+  }
+  return -1;
 }
 function addSach() {
   event.preventDefault();
@@ -275,47 +283,67 @@ function addSach() {
   ) {
     alert("invalid value");
   } else {
-    const sach = {
-      maSach, // duy nhất
-      tenSach,
-      namSX,
-      soTrang,
-      tacGia,
-    };
+    // từ class sach
+    const sach = new Sach(maSach, tenSach, namSX, soTrang, tacGia);
     // kiểm tra tồn tại
-    const isFound = arrSach.filter((item) => item.maSach === sach.maSach);
-    console.log("isFound", isFound);
-    if (isFound && isFound.length === 0) {
-      arrSach.push(sach);
+    // const isFound = arrSach.filter((item) => item.maSach === sach.maSach);
+    // console.log("isFound", isFound);
+    const foundIndex = isKiemTraTonTai(sach.maSach);
+    if (foundIndex === -1) {
+      arrSach.push(sach); // thêm vào
     } else {
       // update sách
       // alert("đã có key");
       const isUpdate = confirm(`bạn có muốn cập nhật mã sách ${sach.maSach}`);
       if (isUpdate == true) {
-        const tmpArr = arrSach.map((item) => {
-          if (item.maSach === sach.maSach) {
-            return {
-              ...sach,
-            };
-          } else {
-            return {
-              ...item,
-            };
-          }
-        });
-        console.log("tmp", tmpArr);
-        arrSach = [...tmpArr];
+        // const tmpArr = arrSach.map((item) => {
+        //   if (item.maSach === sach.maSach) {
+        //     return {
+        //       ...sach,
+        //     };
+        //   } else {
+        //     return {
+        //       ...item,
+        //     };
+        //   }
+        // });
+        // arrSach = [...tmpArr];
         // cách 2
         // arrSach.forEach((item, index) => {
         //   if (item.maSach === sach.maSach) {
         //     arrSach[index] = sach;
         //   }
         // });
+        // => copy hiện tại
+        arrSach[foundIndex] = { ...sach };
       }
     }
     //thêm sách
-    console.log("showListSach");
     showListSach();
+    setLocalStorage("listSach", JSON.stringify(arrSach));
     console.log(arrSach);
   }
 }
+
+const setLocalStorage = (key, value) => {
+  localStorage.setItem(key, value);
+};
+
+const getLocalStorage = (key) => {
+  return localStorage.getItem(key);
+};
+
+// goị sách class
+let sachToan = new Sach("01", "toan", 2021, 200, "nxb giao duc");
+// sachToan.inSach();
+//
+// console.log("tap chi");
+// let tapChi = new TapChi("01", "toan", 2021, 200, "nxb giao duc", "tết");
+// console.log("chu de", tapChi.getChuDe());
+// tapChi.setChuDe("du lịch");
+// console.log("chu de", tapChi.getChuDe());
+// tapChi.inSach();
+// TapChi.xemTacGia();
+window.addEventListener("load", () => {
+  showListSach();
+});
