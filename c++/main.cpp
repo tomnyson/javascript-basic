@@ -1,47 +1,54 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <iostream>
+#include<math.h>
 using namespace std;
 
+bool KiemTraChinhPhuong(int n)
+{
+    return sqrt(float(n)) == (int)sqrt((float)n);
+}
+
+bool KiemTraNguyenTo(int n)
+{
+    if (n < 2)
+    {
+        return false;
+    }
+    else if (n > 2)
+    {
+        if (n % 2 == 0)  // nếu là số chẵn
+        {
+            return false;
+        }
+        for (int i = 3; i <= sqrt((float)n); i += 2)   // kiểm tra các số lẻ
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 int main()
 {
-  // câu điều kiện if else 2 điều kiện
-  // int n = 5;
-
-  // if (n % 2 == 0)
-  // {
-  //   cout << "số chẵn" << endl;
-  // }
-  // else
-  // {
-  //   cout << "số lẻ" << endl;
-  // }
-  // -> giỏi, khá , trung bình , yếu
-  // dtb: <5 yếu, 5 <= dtb <6.5 tb, 6.5<= dtb <= 8.0 khá
-  // 8.0<= dtb <= 10;
-  // step 1: khái báo biến
-  float dtb;
-  // step 2: nhập liệu từ [0-10]
-  cout << "nhập điểm tb của học sinh" << endl;
-  cin >> dtb;
-  while (dtb < 0 || dtb > 10)
-  {
-    cin >> dtb;
-  }
-  // step 3: check điều kiện
-  if (dtb >= 8.0)
-  {
-    cout << "học lực giỏi" << endl;
-  }
-  else if (dtb >= 6.5)
-  {
-    cout << "học lực khá" << endl;
-  }
-  else if (dtb >= 5)
-  {
-    cout << "học lực trung bình" << endl;
-  }
-  else
-  {
-    cout << "học lực yếu" << endl;
-  }
-  return 0;
+    long sum =0;
+    int dem=0;
+    float tbc =0;
+   for(int i=20;i<= 3500;i++) {
+       if(KiemTraChinhPhuong(i)) {
+          sum+=i;
+          dem++;
+       }
+       
+   }
+   std::cout << dem << std::endl;
+    return 0;
 }
