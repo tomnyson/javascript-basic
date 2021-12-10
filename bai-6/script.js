@@ -347,3 +347,42 @@ let sachToan = new Sach("01", "toan", 2021, 200, "nxb giao duc");
 window.addEventListener("load", () => {
   showListSach();
 });
+
+function handleSlug() {
+  var value = document.getElementById("tenSach").value;
+  const slugInput = document.getElementById("slugSach");
+  slugInput.value = string_to_slug(value);
+}
+
+function string_to_slug(str) {
+  // Chuyển hết sang chữ thường
+  str = str.toLowerCase();
+
+  // xóa dấu
+  str = str
+    .normalize("NFD") // chuyển chuỗi sang unicode tổ hợp
+    .replace(/[\u0300-\u036f]/g, ""); // xóa các ký tự dấu sau khi tách tổ hợp
+
+  // Thay ký tự đĐ
+  str = str.replace(/[đĐ]/g, "d");
+
+  // Xóa ký tự đặc biệt
+  str = str.replace(/([^0-9a-z-\s])/g, "");
+
+  // Xóa khoảng trắng thay bằng ký tự -
+  str = str.replace(/(\s+)/g, "-");
+
+  // Xóa ký tự - liên tiếp
+  str = str.replace(/-+/g, "-");
+
+  // xóa phần dư - ở đầu & cuối
+  str = str.replace(/^-+|-+$/g, "");
+
+  // return
+  return str;
+}
+
+/**
+ * đăng nhập vào thì sẽ add locastorage curentCurrent
+ *  -> onload =>curentCurrent admin -> login
+ */

@@ -93,7 +93,7 @@
         </div>
         <div class="col-md-9">
           <h2>Quản lý sách</h2>
-          <form>
+          <!-- <form>
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
@@ -186,12 +186,19 @@
             </div>
             <button type="submit" class="btn btn-success">Success</button>
           </div>
-          </form>
+          </form> -->
           <form id="frmSach" onsubmit="addSach()">
             <label>mã sách</label>
             <input type="text" id="maSach" placeholder="mã sách" />
             <label>tên sách</label>
-            <input type="text" id="tenSach" placeholder="tên sách" />
+            <input
+              type="text"
+              id="tenSach"
+              onchange="handleSlug()"
+              placeholder="tên sách"
+            />
+            <label>slug</label>
+            <input type="text" id="slugSach" disabled placeholder="tên sách" />
             <label>năm sản xuất</label>
             <input type="text" id="namSX" placeholder="năm sx sách" />
             <label>số trang</label>
@@ -213,7 +220,7 @@
           </table>
         </div>
       </div>
-      <div class="flex">
+      <!-- <div class="flex">
         <div id="lstSach">
           <table class="table table-striped">
             <thead>
@@ -227,7 +234,7 @@
             <tbody id="items"></tbody>
           </table>
         </div>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>
