@@ -13,7 +13,8 @@
 		"liveServer.settings.multiRootWorkspaceName": "project-training",
 		"files.associations": {
 			"iostream": "cpp",
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"string": "cpp"
 		}
 	}
 }
